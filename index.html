@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bicho Bão | Clínica Veterinária e Pet Shop</title>
+  <meta name="description" content="Bicho Bão Clínica Veterinária e Pet Shop em Guaxupé/MG. Cuidado profissional para o seu melhor amigo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #1a6641;
+      --green-light: #2d9b63;
+      --green-pale: #e8f5ee;
+      --green-mid: #4db882;
+      --cream: #faf8f3;
+      --warm: #f5f0e8;
+      --dark: #0d1f13;
+      --dark-mid: #1c3328;
+      --gold: #c9a84c;
+      --text: #1a2e20;
+      --text-muted: #5a7a65;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--green);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, opacity 0.3s ease;
+      mix-blend-mode: multiply;
+    }
+    .cursor-follower {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--green);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease;
+      opacity: 0.5;
+    }
+
+    /* --- NAVBAR --- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 48px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(250, 248, 243, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(26, 102, 65, 0.1);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 46px;
+      height: 46px;
+      background: var(--green);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .nav-logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+    .nav-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .nav-logo-sub {
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .social-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: white;
+      letter-spacing: 0.02em;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .social-pill:hover { transform: translateY(-3px) scale(1.04); filter: brightness(1.1); }
+    .social-pill svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .pill-ig { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    .pill-wa { background: #25D366; }
+    .pill-fb { background: #1877F2; }
+    .pill-label { display: none; }
+
+    @media (min-width: 900px) {
+      .pill-label { display: inline; }
+    }
+
+    /* --- HERO --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #e8f5ee 0%, var(--cream) 50%, #f0f7e8 100%);
+      z-index: 0;
+    }
+
+    .hero-noise {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    .hero-orb1 {
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(45,155,99,0.15) 0%, transparent 70%);
+      z-index: 0;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .hero-orb2 {
+      position: absolute;
+      bottom: -10%;
+      left: -5%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+      z-index: 0;
+      animation: orbFloat 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(20px, -20px) scale(1.05); }
+      66% { transform: translate(-10px, 15px) scale(0.97); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(26, 102, 65, 0.08);
+      border: 1px solid rgba(26, 102, 65, 0.2);
+      padding: 8px 20px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.2s ease-out forwards;
+    }
+    .hero-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green-mid);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--dark);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.9s 0.4s ease-out forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s 0.6s ease-out forwards;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--green);
+      color: white;
+      padding: 16px 36px;
+      border-radius: 99px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      opacity: 0;
+      animation: fadeUp 0.9s 0.8s ease-out forwards;
+      box-shadow: 0 8px 32px rgba(26, 102, 65, 0.3);
+    }
+    .hero-cta:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 16px 48px rgba(26, 102, 65, 0.4);
+      background: var(--green-light);
+    }
+    .hero-cta svg { width: 20px; height: 20px; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- PHOTO GALLERY STRIP --- */
+    .gallery-section {
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-track-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-track-wrapper::before,
+    .gallery-track-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .gallery-track-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, var(--cream), transparent);
+    }
+    .gallery-track-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, var(--cream), transparent);
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      animation: scrollTrack 30s linear infinite;
+      padding: 40px 0;
+    }
+    .gallery-track:hover { animation-play-state: paused; }
+
+    @keyframes scrollTrack {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .gallery-card {
+      position: relative;
+      width: 280px;
+      height: 380px;
+      border-radius: 24px;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 12px 40px rgba(13, 31, 19, 0.12);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+    .gallery-card:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 24px 64px rgba(13, 31, 19, 0.2);
+    }
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.6s ease;
+    }
+    .gallery-card:hover img { transform: scale(1.05); }
+    .gallery-card-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(13,31,19,0.85) 0%, transparent 60%);
+      padding: 28px 20px 20px;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    .gallery-card:hover .gallery-card-overlay { transform: translateY(0); }
+    .gallery-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+    }
+    .gallery-card-role {
+      font-size: 0.78rem;
+      color: var(--green-mid);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    /* --- ABOUT / TEAM SECTION --- */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 80px 48px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(26,102,65,0.2), transparent);
+    }
+    .divider-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .team-section {
+      padding: 0 48px 120px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .team-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 80px;
+    }
+
+    .team-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+    }
+    .team-heading em { font-style: italic; color: var(--green); }
+
+    .team-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .team-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(13, 31, 19, 0.06);
+      border: 1px solid rgba(26, 102, 65, 0.06);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .team-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    }
+    .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(13, 31, 19, 0.12);
+    }
+
+    .team-card-large {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .team-card-img {
+      position: relative;
+      overflow: hidden;
+      height: 360px;
+    }
+    .team-card-large .team-card-img { height: 100%; min-height: 400px; }
+
+    .team-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.6s ease;
+    }
+    .team-card:hover .team-card-img img { transform: scale(1.04); }
+
+    .team-card-body {
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .team-card-badge {
+      display: inline-block;
+      background: var(--green-pale);
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+
+    .team-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .team-card-role {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .team-card-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* --- SERVICES --- */
+    .services-section {
+      background: var(--dark);
+      padding: 120px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .services-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18vw;
+      font-weight: 700;
+      color: rgba(255,255,255,0.02);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -0.05em;
+      user-select: none;
+    }
+
+    .services-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .services-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: white;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .services-heading em { font-style: italic; color: var(--green-mid); }
+
+    .services-sub {
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      font-size: 1.05rem;
+      margin-bottom: 80px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-item {
+      padding: 48px 40px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .service-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease, background 0.4s ease, border-color 0.4s ease;
+    }
+    .service-item:hover {
+      background: rgba(45, 155, 99, 0.1);
+      border-color: rgba(45, 155, 99, 0.3);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(45, 155, 99, 0.15);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .service-icon svg { width: 26px; height: 26px; color: var(--green-mid); }
+
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* --- INFO STRIP --- */
+    .info-strip {
+      background: var(--green);
+      padding: 80px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .info-items {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+    }
+
+    .info-item {
+      padding: 40px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    .info-item:last-child { border-right: none; }
+
+    .info-item-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 12px;
+    }
+    .info-item-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.3;
+    }
+    .info-item-sub {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+      margin-top: 6px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      background: var(--dark);
+      padding: 100px 48px 48px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 80px;
+      padding-bottom: 80px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 48px;
+    }
+
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .footer-brand-desc {
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+      max-width: 320px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-social a {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .footer-social a:hover { background: var(--green); border-color: var(--green); color: white; }
+
+    .footer-col h5 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 28px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.92rem;
+      font-weight: 300;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .footer-col a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-col a:hover { color: var(--green-mid); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      color: rgba(255,255,255,0.2);
+      font-size: 0.82rem;
+    }
+    .footer-lgpd-link {
+      color: rgba(255,255,255,0.3);
+      font-size: 0.82rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-lgpd-link:hover { color: var(--green-mid); }
+
+    /* --- SCROLL REVEAL --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero { padding: 100px 24px 60px; }
+      .team-header { grid-template-columns: 1fr; gap: 24px; }
+      .team-grid { grid-template-columns: 1fr; }
+      .team-card-large { grid-column: span 1; grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .info-items { grid-template-columns: 1fr; }
+      .info-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); }
+      .footer-top { grid-template-columns: 1fr; gap: 48px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .section-divider { padding: 60px 24px 40px; }
+      .team-section { padding: 0 24px 80px; }
+      .services-section { padding: 80px 24px; }
+      .info-strip { padding: 60px 24px; }
+      footer { padding: 80px 24px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <img src="https://images.unsplash.com/photo-1778072458434-509ed38e65bc?" alt="Bicho Bão" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nav-logo-text">Bicho Bão</div>
+        <div class="nav-logo-sub">Clínica Veterinária</div>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <a href="https://www.instagram.com/" class="social-pill pill-ig" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <span class="pill-label">Instagram</span>
+      </a>
+      <a href="https://wa.me/553599999999" class="social-pill pill-wa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        <span class="pill-label">WhatsApp</span>
+      </a>
+      <a href="https://www.facebook.com/" class="social-pill pill-fb" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <span class="pill-label">Facebook</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-noise"></div>
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        Guaxupé, Minas Gerais
+      </div>
+      <h1 class="hero-title">Cuidado com quem você <em>ama</em></h1>
+      <p class="hero-subtitle">Medicina veterinária de excelência, carinho profissional e dedicação ao bem-estar do seu pet.</p>
+      <a href="https://wa.me/553599999999" class="hero-cta" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.59A2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Agendar Consulta
+      </a>
+    </div>
+  </section>
+
+  <!-- GALLERY STRIP -->
+  <section class="gallery-section">
+    <div class="gallery-track-wrapper">
+      <div class="gallery-track" id="galleryTrack">
+        <!-- Cards duplicated for seamless loop -->
+        <div class="gallery-card">
+          <img src="https://images-proof.alboompro.com/c/resize/width/1200/height/1200/J9nu_p5CXchNEQYK2o1q9Z_Rzx-GE0aEl2pqgJguo80Npzv_T4HRbRbeBimqR6494LtXCfsAA4iNtMUJxvPkkVi0T3jVOxtkhbn4nlSagvFayoAfCyJ-Qd65b4JQHwrfYqq4DUAAAWb809vR8fe4fFgWGYjAHmUupsSJd-tXqk11wXw5gAV3_r5UqyzC-BPAPM5-pgSDESdKpA75-bThVCLY3cBlmlA.jpg" alt="Helbert Valverde" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-name">Helbert Valverde</div>
+            <div class="gallery-card-role">Médico Veterinário</div>
+          </div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images-proof.alboompro.com/c/resize/width/500/height/3840/pOlUdPiiNtp_QHxkxPHriw_GiU4gVZ3pqPbe8TTxNPw7KZbo79YQ4dbHul7Af0htdxfIC7llia1nyNg5m5vudB2aSPULAYMTT-_THNPV_PS_pj3G8NONgX_3lDp1WMZeOzEJRpGyPszpJn2ogfQ8-w8kklFl5OeaspboL09-ZAyu05vREtUrSyxYUSMZo_xAb8IiYCfnCmg-T513Vzl9NcyqYhlWNB0.jpg" alt="Helbert com paciente" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-name">Amor pelos Pets</div>
+            <div class="gallery-card-role">Cuidado com carinho</div>
+          </div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images-proof.alboompro.com/c/resize/width/500/height/3840/J9nu_p5CXchNEQYK2o1q9Z_Rzx-GE0aEl2pqgJguo80Npzv_T4HRbRbeBimqR6494LtXCfsAA4iNtMUJxvPkkVi0T3jVOxtkhbn4nlSagvFayoAfCyJ-Qd65b4JQHwrfYqq4DUAAAWb809vR8fe4fFgWGYjAHmUupsSJd-tXqk11wXw5gAV3_r5UqyzC-BPAPM5-pgSDESdKpA75-bThVCLY3cBlmlA.jpg" alt="Consulta veterinária" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-name">Consulta Especializada</div>
+            <div class="gallery-card-role">Diagnóstico preciso</div>
+          </div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images-proof.alboompro.com/c/resize/width/1200/height/1200/kPMX7InZUXbJV-kT29KXJoUbSA_Vq40zXD6tx1eroYHPRzuY8yjGpI31M97g2l-PlotinOcTzXpcbSYnDIa3mcvS3dxHRgHCgYxch1ug07d5vW7mrEnKAgkYCvAIb6m5rDwBAJaclXBfmJ-umiOwX4SvYG6iDt8nU0vBF0uLDh_ktl1RjGjq9mQDnM93evZI6Le2_JzxbKMTPdgsiUmHF9z6WGi2heQ.jpg" alt="Equipe Bicho Bão" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-name">Nossa Equipe</div>
+            <div class="gallery-card-role">Profissionais dedicados</div>
+          </div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images-proof.alboompro.com/c/resize/width/1200/height/1200/R5thSgTqlHDOTXMe0-7QVEBNWHdZx6ty9aJBUSLPSf79bioqFNBBjxZiW-CDoXWskOwTFR0WLikljO-2oULUZNiD0i1AfWwoVj7lUkGztwMw51jhSXbOMSqqBW5d6XkKSnFQ8YX8H77PK6AOb9cSs85bWkslu-RaXPfLoBHR4y61mEI913OaW2oUqt8CeHjyRO0hPZEUgGI1H7tfvt62EpH_So8_kA.jpg" alt="Pet Shop Bicho Bão" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-name">Bicho Bão</div>
+            <div class="gallery-card-role">Clínica & Pet Shop</div>
+          </div>
+        </div>
+        <!-- Duplicate for loop -->
+        <div class="gallery-card">
+          <img src="https://images-proof.alboompro.com/c/resize/width/500/height/3840/IKvo6O2TYTMy5tJaKxGPaybYK5JqzMg_K_f5VyBW03dhGEjO0c029PoEyFW91Vx5a2ryj7PbWLcmA0DBu4pgp2_zakDG586GhbrMVTMCvdh34rH4e-gc9jTfPu6zqRbq6zGVUIhp330jBPrE7dzCdsye2TvnqOGfNr6-IuTrHZTqpeqv6OiIOh7OqRlkqAlCxV7hXl0PDFe-XX7kJFrbykBimuicGvI.jpg" alt="Helbert Valverde" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-name">Helbert Valverde</div>
+            <div class="gallery-card-role">Médico Veterinário</div>
+          </div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images-proof.alboompro.com/c/resize/width/500/height/3840/jsFWgSBhukrgSPQHlrzcNoABnUJDx0u4AbY1KrCGY9gDCBs8h8z_yQwH7lh-JsOaU-WwRY-4RQw8uHRFQGPwI4IrgjHLwodcZfKe2c9aXJhaxTu_YpB0YnU19vBKwm8AZry-l9OtlrT9ZKr-YShGKGbQJSEZ8WbCFSHNxVpB60byICOdgQxAWMNaeAJfQ9l1_xEfVtnq9lE9XZ5Qny_onPD9OIoFMuQ.jpg" alt="Helbert com paciente" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-name">Amor pelos Pets</div>
+            <div class="gallery-card-role">Cuidado com carinho</div>
+          </div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images-proof.alboompro.com/c/resize/width/500/height/3840/n6IpYwFr9cp85GqVmyIpnsrOk80QIkUGfPirpLXZj8OZaY7u6Z239gYOzdRLO2Doyt4NTklEBlCynxTBaArU3yTr4sc5EbSMA0koMBYHUToSow643tcnTexzUK9I-OoDaBFFXY8S_L_XFxiB-N-7crVrntgJflC0nuUxHBqZu4bJV9vkdeFiB_72weIacO-IE-GOr-GZ6Q2Gbq1IKt-vGfdFyGEKWqw.jpg" alt="Consulta veterinária" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-name">Consulta Especializada</div>
+            <div class="gallery-card-role">Diagnóstico preciso</div>
+          </div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images-proof.alboompro.com/c/resize/width/500/height/3840/m8YDyCJl80HwdWc1SQaR_wjb6oAkcsCxLyafUKDcquwXlVgBLuOqFMOaNLr8YOP0zS8h3eX76crxg6s3SreQQQ5-kHlyAknISPmxEThjLCxInnckUQdLJd47WRz2vI4fXerjKEDmOt6j6PORIbbCLAemeD23dUfmGg-n1JSx652uWcLzMDQazUgKXDk1Bcqt3LIS86-1RbeiHukXnEMvMzN5Cg_mjg.jpg" alt="Equipe Bicho Bão" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-name">Nossa Equipe</div>
+            <div class="gallery-card-role">Profissionais dedicados</div>
+          </div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images-proof.alboompro.com/c/resize/width/500/height/3840/jsFWgSBhukrgSPQHlrzcNoABnUJDx0u4AbY1KrCGY9gDCBs8h8z_yQwH7lh-JsOaU-WwRY-4RQw8uHRFQGPwI4IrgjHLwodcZfKe2c9aXJhaxTu_YpB0YnU19vBKwm8AZry-l9OtlrT9ZKr-YShGKGbQJSEZ8WbCFSHNxVpB60byICOdgQxAWMNaeAJfQ9l1_xEfVtnq9lE9XZ5Qny_onPD9OIoFMuQ.jpg" alt="Pet Shop Bicho Bão" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-card-name">Bicho Bão</div>
+            <div class="gallery-card-role">Clínica & Pet Shop</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <div class="section-divider">
+    <div class="divider-line"></div>
+    <span class="divider-label">Nossa Equipe</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <section class="team-section">
+    <div class="team-header reveal">
+      <h2 class="team-heading">Profissionais que <em>amam</em> o que fazem</h2>
+      <p class="team-desc">Nossa equipe é formada por veterinários apaixonados pela saúde animal, com formação de alto nível e dedicação incomparável a cada paciente.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card team-card-large" data-delay="0">
+        <div class="team-card-img">
+          <img src="https://images-proof.alboompro.com/c/resize/width/500/height/3840/Krx2QD1e4oQmhrrh-wG6TV-Upkbl4ERwyHa2YF5FMyRpCyE5UMO2hL11p_EVP2xJ_LyQD6Fv1DN87mzvEAnRjSjK3nzd8XJRmWoPlgMsBa-aWzcCYIZmXj43QIb9rMCsc752iwShMYLahZmxTEs6Wx_pUD2VW3ig_3DtLgg-0wnYk0X1iC3YaBvT68yWgRyMLD6NzYov1bTMKLE2sHVKHwp4f2yI66M.jpg" alt="Helbert Valverde" loading="lazy">
+        </div>
+        <div class="team-card-body">
+          <span class="team-card-badge">Diretor Clínico</span>
+          <h3 class="team-card-name">Helbert Valverde</h3>
+          <div class="team-card-role">Médico Veterinário — CRMV/MG</div>
+          <p class="team-card-text">Formado pelo Instituto Federal de Minas Gerais, Dr. Helbert une expertise clínica com uma abordagem humanizada. Especialista em medicina de pequenos animais, dedica-se diariamente à saúde e bem-estar de cada pet que atende na Bicho Bão.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SERVICES -->
+  <section class="services-section">
+    <div class="services-bg-text">Bicho Bão</div>
+    <div class="services-inner">
+      <p class="services-sub reveal">O que oferecemos</p>
+      <h2 class="services-heading reveal">Serviços <em>completos</em><br>para o seu pet</h2>
+      <div class="services-grid">
+        <div class="service-item" data-delay="0">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="service-name">Clínica Geral</div>
+          <p class="service-desc">Consultas clínicas completas, diagnóstico preciso e tratamento personalizado para cães e gatos.</p>
+        </div>
+        <div class="service-item" data-delay="100">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div class="service-name">Emergências</div>
+          <p class="service-desc">Atendimento de urgência com estrutura e equipe preparadas para situações críticas.</p>
+        </div>
+        <div class="service-item" data-delay="200">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="service-name">Vacinação</div>
+          <p class="service-desc">Calendário vacinal completo e controle parasitário para proteger quem você ama.</p>
+        </div>
+        <div class="service-item" data-delay="300">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="service-name">Exames e Diagnóstico</div>
+          <p class="service-desc">Exames laboratoriais, ultrassonografia e demais recursos diagnósticos modernos.</p>
+        </div>
+        <div class="service-item" data-delay="400">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="service-name">Pet Shop</div>
+          <p class="service-desc">Produtos de qualidade, rações premium, acessórios e tudo que seu pet precisa.</p>
+        </div>
+        <div class="service-item" data-delay="500">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          </div>
+          <div class="service-name">Cirurgias</div>
+          <p class="service-desc">Centro cirúrgico equipado para procedimentos de rotina e intervenções especializadas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO STRIP -->
+  <div class="info-strip">
+    <div class="info-items">
+      <div class="info-item">
+        <div class="info-item-label">Endereço</div>
+        <div class="info-item-value">Pra. Dona Suzana Barbosa, 91</div>
+        <div class="info-item-sub">Centro — Guaxupé/MG 37.830-053</div>
+      </div>
+      <div class="info-item">
+        <div class="info-item-label">CNPJ</div>
+        <div class="info-item-value">48.373.614/0001-45</div>
+        <div class="info-item-sub">Bicho Bão Clínica Veterinária e Pet Shop</div>
+      </div>
+      <div class="info-item">
+        <div class="info-item-label">Contato</div>
+        <div class="info-item-value">(35) 99999-9999</div>
+        <div class="info-item-sub">helbert.valverde@ufv.br</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">Bicho Bão</div>
+          <p class="footer-brand-desc">Cuidado profissional e carinhoso para o melhor amigo da sua família. Guaxupé e região, com amor e dedicação desde o primeiro dia.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+            <a href="https://wa.me/553599999999" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Serviços</h5>
+          <ul>
+            <li>Clínica Geral</li>
+            <li>Emergências 24h</li>
+            <li>Vacinação</li>
+            <li>Cirurgias</li>
+            <li>Pet Shop</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Institucional</h5>
+          <ul>
+            <li><a href="lgpd.html">Política de Privacidade</a></li>
+            <li><a href="lgpd.html">LGPD</a></li>
+            <li><a href="mailto:helbert.valverde@ufv.br">Contato</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2026 Bicho Bão Clínica Veterinária e Pet Shop. Todos os direitos reservados.</span>
+        <a href="lgpd.html" class="footer-lgpd-link">Politica de Privacidade &amp; LGPD</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const follower = document.getElementById('cursorFollower');
+    let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursor.style.transform = `translate(${mouseX - 6}px, ${mouseY - 6}px)`;
+    });
+    function animateFollower() {
+      followerX += (mouseX - followerX) * 0.12;
+      followerY += (mouseY - followerY) * 0.12;
+      follower.style.transform = `translate(${followerX - 18}px, ${followerY - 18}px)`;
+      requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.transform += ' scale(2)'; follower.style.opacity = '0'; });
+      el.addEventListener('mouseleave', () => { cursor.style.transform = cursor.style.transform.replace(' scale(2)', ''); follower.style.opacity = '0.5'; });
+    });
+
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    // Scroll reveal with IntersectionObserver
+    const revealEls = document.querySelectorAll('.reveal, .team-card, .service-item');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.dataset.delay || 0;
+          setTimeout(() => { entry.target.classList.add('visible'); }, parseInt(delay));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
